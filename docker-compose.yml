@@ -31,7 +31,6 @@ services:
       - mysqldb
       - redisdb
     environment:
-      # Override Spring Boot settings using the secure variables
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/${MYSQL_DB}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}

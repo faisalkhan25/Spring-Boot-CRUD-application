@@ -23,7 +23,8 @@ public class MyApplicationSecurity {
         http.authorizeHttpRequests(
                 authorize -> authorize.requestMatchers(HttpMethod.DELETE, "/employee/delete/{id}")
                         .hasAnyRole("ADMIN")
-                        .requestMatchers("/**").permitAll())
+                        .requestMatchers("/**")
+                        .permitAll())
                 .httpBasic(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
         return http.build();
@@ -36,16 +37,16 @@ public class MyApplicationSecurity {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.builder()
+        UserDetails admin = User.builder()
                 .username("faisal khan")
                 .password(passwordEncoder().encode("Faisal Khan"))
                 .roles("ADMIN")
                 .build();
-        UserDetails userDetails2 = User.builder()
+        UserDetails user = User.builder()
                 .username("Guest")
                 .password(passwordEncoder().encode("guest"))
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(userDetails, userDetails2);
+        return new InMemoryUserDetailsManager(admin, user);
     }
 }

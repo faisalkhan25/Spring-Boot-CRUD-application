@@ -34,8 +34,8 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
-    public Employee partialUpdateEmployee(Double salary, Integer id) {
-        employeeRepository.partialUpdateEmployeeSalary(salary, id);
-        return getEmployeeById(id);
+    public Employee partialUpdateEmployee(Double salary, Integer employeeId) {
+        employeeRepository.partialUpdateEmployeeSalary(salary, employeeId);
+        return getEmployeeById(employeeId);
     }
 }

@@ -20,12 +20,13 @@ public class MyApplicationSecurity {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
+        http
+                .authorizeHttpRequests(
                 authorize -> authorize.requestMatchers(HttpMethod.DELETE, "/employee/delete/{id}")
                         .hasAnyRole("ADMIN")
                         .requestMatchers("/**")
                         .permitAll())
-                .httpBasic(Customizer.withDefaults());
+                .formLogin(Customizer.withDefaults());
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }

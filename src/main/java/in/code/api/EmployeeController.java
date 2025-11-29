@@ -24,7 +24,7 @@ public class EmployeeController {
 
     @GetMapping(
             value = "/{id}",
-            produces = {"application/json", "application/xml"}
+            produces = {"application/json"}
     )
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Integer id) {
         Employee employee = employeeService.getEmployeeById(id);
@@ -39,7 +39,7 @@ public class EmployeeController {
 
     @GetMapping(
             value = "/all",
-            produces = {"application/xml", "application/json"}
+            produces = {"application/json"}
     )
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = employeeService.getAllEmployees();
@@ -48,8 +48,8 @@ public class EmployeeController {
 
     @PostMapping(
             value = "/create",
-            consumes = {"application/json", "application/xml"},
-            produces = {"application/json", "application/xml"}
+            consumes = {"application/json"},
+            produces = {"application/json"}
     )
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) {
         try {
@@ -63,8 +63,8 @@ public class EmployeeController {
 
     @PutMapping(
             value = "/update",
-            produces = {"application/json", "application/xml"},
-            consumes = {"application/json", "application/xml"}
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
     public ResponseEntity<Employee> updateEmployee(@Valid @RequestBody Employee employee) {
         Employee employeeFromDb = employeeService.getEmployeeById(employee.getEmployeeId());
@@ -79,8 +79,8 @@ public class EmployeeController {
 
     @PatchMapping(
             value = "/partialUpdate/{id}",
-            produces = {"application/json", "application/xml"},
-            consumes = {"application/json", "application/xml"}
+            produces = {"application/json"},
+            consumes = {"application/json"}
     )
     public ResponseEntity<Employee> partialUpdateEmployee(@PathVariable Integer id, @RequestBody Map<String, Object> employeeData) {
 

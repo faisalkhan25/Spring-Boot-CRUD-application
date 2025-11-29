@@ -12,16 +12,6 @@ services:
     networks:
       - spring-net
 
-  redisdb:
-    image: redis:alpine
-    container_name: redis-container
-    ports:
-      - "${REDIS_PORT}:6379"
-    volumes:
-      - redis_data:/data
-    networks:
-      - spring-net
-
   app:
     build: .
     container_name: spring-boot-app
@@ -29,19 +19,15 @@ services:
       - "8082:8082"
     depends_on:
       - mysqldb
-      - redisdb
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/${MYSQL_DB}
       SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
       SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
-      SPRING_DATA_REDIS_HOST: redisdb
-      SPRING_DATA_REDIS_PORT: ${REDIS_PORT}
     networks:
       - spring-net
 
 volumes:
   mysql_data:
-  redis_data:
 networks:
   spring-net:
     driver: bridge
